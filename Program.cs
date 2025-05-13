@@ -191,13 +191,14 @@ namespace menu_numbers
 
 
 
+
         static void menuFunc(string choos , List<int> listi)
         {
            
             switch (choos)
             {
                 case "1":
-                    //change list();
+                    changeListInt(listi);
                     break;
                 case "2":
                     //display list();
@@ -227,24 +228,30 @@ namespace menu_numbers
             
         }
 
-    static void playMenu(List<int> listi)
-            {
-                string choos = "";
-                while (choos != "10")
+        static List<int> changeListInt(List<int> listi)
+        {
+            listi = threeNum();
+            return listi;
+        }
+
+        static void playMenu(List<int> listi)
                 {
-                    menu();
-                    choos = Console.ReadLine();
-                    if (!ifChoosInMenu(choos))
+                    string choos = "";
+                    while (choos != "10")
                     {
-                        Console.WriteLine("plese choos only 1-10");
-                        continue;
+                        menu();
+                        choos = Console.ReadLine();
+                        if (!ifChoosInMenu(choos))
+                        {
+                            Console.WriteLine("plese choos only 1-10");
+                            continue;
+                        }
+                        menuFunc(choos , listi);
+
+
+
                     }
-                    menuFunc(choos , listi);
-
-
-
                 }
-            }
 
 
 
@@ -253,7 +260,7 @@ namespace menu_numbers
         static void Main(string[] args)
         {
 
-           converAegsListInt(args);
+           playMenu(converAegsListInt(args));
            
             
         }
