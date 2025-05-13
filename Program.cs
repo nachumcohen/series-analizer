@@ -75,11 +75,10 @@ namespace menu_numbers
         }
 
         //Creates a list at least 3 numbers until the user stoped.
-        static List<int> threeNum()
+        static List<int> threeNum(List<int> listInt)
         {
             int min = 0;
             string stop = "";
-            List<int> listInt = new List<int>();
 
             while (min < 3 || stop != "stop")
             {
@@ -93,7 +92,7 @@ namespace menu_numbers
 
                 if (!ifPositive(ifNum(input)))
                 {
-                    Console.WriteLine("pleas enter only number");
+                    Console.WriteLine("pleas enter only number and positive");
                 }
 
                 if (min >= 3)
@@ -118,11 +117,11 @@ namespace menu_numbers
             List<int> listInt = new List<int>();
             if (arge.Length < 3)
             {
-                listInt = threeNum();
+                listInt = threeNum(listInt);
             }
             else if (!ifListNuPos(arge))
             {
-                listInt = threeNum();
+                listInt = threeNum(listInt);
             }
             else
             {
@@ -150,6 +149,7 @@ namespace menu_numbers
             10. exit");
         }
 
+        //makes sure in choos
         static bool ifChoosInMenu(string choos)
         {   
             bool choosTrue = false;
@@ -201,7 +201,7 @@ namespace menu_numbers
                     changeListInt(listi);
                     break;
                 case "2":
-                    //display list();
+                    showList(listi);
                     break;
                 case "3":
                     //display reverse();
@@ -210,48 +210,121 @@ namespace menu_numbers
                     //display sort();
                     break;
                 case "5":
-                    //display max() ;
+                    Console.WriteLine(maxList(listi));
                     break;
                 case "6":
-                    //display min();
+                    Console.WriteLine(valuyeMinList(listi));
                     break;
                 case "7":
-                    //display average;
+                    Console.WriteLine(avargeOfNumList(listi));
                     break;
                 case "8":
-                    // number element;
+                    Console.WriteLine(numElements(listi));
                     break;
                 case "9":
-                    //sum list;
+                    Console.WriteLine(sumList(listi));
                     break;
             }
             
         }
 
-        static List<int> changeListInt(List<int> listi)
+        //change list of int
+        static void changeListInt(List<int> listi)
         {
-            listi = threeNum();
-            return listi;
+            
+            listi.Clear();
+            threeNum(listi);
+            
         }
 
-        static void playMenu(List<int> listi)
+        //show all values
+        static void showList(List<int> show)
+        {
+            foreach (int i in show)
+            {
+                Console.Write(i);
+            }
+        }
+
+        //static void showReverseList(List<int> reverse)
+        //{
+
+        //}
+
+        //static List<int> sortList(List<int> sortlist)
+        //{
+           
+        //}
+
+
+        //print num max from list
+        static int maxList(List<int> maxlist)
+        {
+            int max = 0;
+            foreach (int i in maxlist)
+            {
+                if (i > max)
                 {
-                    string choos = "";
-                    while (choos != "10")
-                    {
-                        menu();
-                        choos = Console.ReadLine();
-                        if (!ifChoosInMenu(choos))
-                        {
-                            Console.WriteLine("plese choos only 1-10");
-                            continue;
-                        }
-                        menuFunc(choos , listi);
-
-
-
-                    }
+                    max = i;
                 }
+            }
+            return max;
+        }
+
+        //print num min from list
+        static int valuyeMinList(List<int> minlist)
+        {
+            int min = minlist[0];
+            foreach (int i in minlist)
+            {
+                if (i < min)
+                {
+                    min = i;
+                }
+            }
+            return min;
+        }
+
+        static int avargeOfNumList(List<int> avelist)
+        {
+            return sumList(avelist) / numElements(avelist);
+        }
+
+        static int numElements(List<int> numelem)
+        {
+            return numelem.Count;
+        }
+
+        static int sumList(List<int> sumlist)
+        {
+            int sum = 0;
+            foreach(int i in sumlist)
+            {
+                sum += i;
+            }
+            return sum;
+        }
+
+
+        
+        static void playMenu(List<int> listi)
+        {
+            string choos = "";
+            while (choos != "10")
+            {
+                menu();
+                choos = Console.ReadLine();
+                if (!ifChoosInMenu(choos))
+                {
+                    Console.WriteLine("plese choos only 1-10");
+                    continue;
+                }
+                menuFunc(choos , listi);
+
+
+
+            }
+        }
 
 
 
